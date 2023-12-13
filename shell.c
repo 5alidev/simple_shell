@@ -22,7 +22,7 @@ char **parse_input(char *ptLine)
 			next_word = strtok(NULL, " \t\n");
 			if (next_word != NULL)
 			{
-				printf("No such file or directory\n");
+				perror("");
 				free(array[0]);
 				free(array);
 				return (NULL);
@@ -36,7 +36,7 @@ char **parse_input(char *ptLine)
 	}
 	else
 	{
-		printf("No Command Found\n");
+		perror("No Command Found");
 	}
 	return (array);
 }
@@ -58,7 +58,7 @@ void execute_command(char **array, char **env)
 	{
 		if (execve(array[0], array, env) == -1)
 		{
-			printf("No such file or directory\n");
+			perror("");
 		}
 	}
 	else
