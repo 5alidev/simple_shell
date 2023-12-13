@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/wait.h>
+#include "shell.h"
 /**
  * parse_input - Parse input
  *
@@ -21,7 +17,7 @@ char **parse_input(char *ptLine)
 		array = malloc(sizeof(char *) * 2);
 		if (array != NULL)
 		{
-			array[0] = strdup(command);
+			array[0] = _strdup(command);
 			array[1] = NULL;
 			next_word = strtok(NULL, " \t\n");
 			if (next_word != NULL)
