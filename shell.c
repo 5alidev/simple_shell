@@ -110,4 +110,3 @@ int main(int argc, char **argv, char **env)
 	free(ptLine);
 	return (0);
 }
-
