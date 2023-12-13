@@ -90,7 +90,7 @@ int main(int argc, char **argv, char **env)
 	(void)argv;
 	while (1)
 	{
-		write(1, "$ ", 2);
+		write(1, "#cisfun$ ", 9);
 		nbr_chars = getline(&ptLine, &len, stdin);
 		if (nbr_chars == -1)
 		{
