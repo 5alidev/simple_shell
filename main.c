@@ -28,6 +28,10 @@ int main(int argc, char **argv)
 		command = formatString(inputLine);
 		if (!command)
 			continue;
+		if (is_builtin(command[0]))
+		{
+			handle_builtin(command, argv, &status, idx);
+		}
 		status = _execute(command, argv, idx);
 	}
 	return (0);
