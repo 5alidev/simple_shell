@@ -16,9 +16,18 @@ void free2Darray(char **array)
 		free(array[i]), array[i] = NULL;
 	free(array), array = NULL;
 }
-void print_error(char *name, char *cmd, int idx)
+/**
+ * printError - print error message
+ *
+ * @name: name
+ * @cmd: wrong command
+ * @idx: index of error
+ *
+ * Return: Nothing (void)
+ */
+void printError(char *name, char *cmd, int idx)
 {
-	char *index, mssg[] = ": not found\n";
+	char *index, msg[] = ": not found\n";
 
 	index = _itoa(idx);
 
@@ -27,43 +36,58 @@ void print_error(char *name, char *cmd, int idx)
 	write(STDERR_FILENO, index, _strlen(index));
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, cmd, _strlen(cmd));
-	write(STDERR_FILENO, mssg, _strlen(mssg));
+	write(STDERR_FILENO, msg, _strlen(msg));
+	free(index);
 }
-char *_itoa(int n)
+/**
+ * _itoa - convert integer to ASCI
+ *
+ * @nb: integer to convert
+ *
+ * Return: asci code of integer
+ */
+char *_itoa(int nb)
 {
 	char buffer[20];
 	int i = 0;
 
-	if (n = 0)
+	if (nb == 0)
 	{
 		buffer[i++] = '0';
 	}
 	else
 	{
-		while(n > 0)
+		while (nb > 0)
 		{
-			buffer[i++] = (n % 10) + '0';
-			n /= 10;
+			buffer[i++] = (nb % 10) + '0';
+			nb /= 10;
 		}
 	}
 	buffer[i] = '\0';
-	reverse_string(buffer, i);
+	reverseString(buffer, i);
 
 	return (_strdup(buffer));
 }
-
-void reverse_string(char *str, int len)
+/**
+ * reverseString - reverse a string
+ *
+ * @str: string to reverse
+ * @len: length of the string
+ *
+ * Return: Nothing (void)
+ */
+void reverseString(char *str, int len)
 {
-	char tmp;
-	int start = 0;
+	char temp;
+	int beg = 0;
 	int end = len - 1;
 
-	while (start < end)
+	while (beg < end)
 	{
-		tmp = str[start];
-		str[start] = str[end];
-		str[end] = tmp;
-		start++;
+		temp = str[beg];
+		str[beg] = str[end];
+		str[end] = temp;
+		beg++;
 		end--;
 	}
 }

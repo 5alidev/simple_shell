@@ -1,5 +1,12 @@
 #include "shell.h"
-int _getenv(const char *var)
+/**
+ * _getenv - get env variables
+ *
+ * @name: name of var to get
+ *
+ * Return: int
+ */
+char *_getenv(char *name)
 {
 	char *tptmp, *tpkey, *tpvalue, *tpenv;
 	int i;
@@ -8,10 +15,10 @@ int _getenv(const char *var)
 	{
 		tptmp =  _strdup(environ[i]);
 		tpkey = strtok(tptmp, "=");
-		if (_strcmp(tpkey, var) == 0)
+		if (_strcmp(tpkey, name) == 0)
 		{
 			tpvalue = strtok(NULL, "\n");
-			env = _strdup(tpvalue);
+			tpenv = _strdup(tpvalue);
 			free(tptmp);
 			return (tpenv);
 		}

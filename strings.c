@@ -84,9 +84,17 @@ char *_strcat(char *dest, char *src)
 		ptr++;
 		src++;
 	}
-	*ptr = *src;
+	*ptr = '\0';
 	return (dest);
 }
+/**
+ * _strcpy - copy a string
+ *
+ * @dest: destination string
+ * @src: source string
+ *
+ * Return: string
+ */
 char *_strcpy(char *dest, char *src)
 {
 	int i = 0;

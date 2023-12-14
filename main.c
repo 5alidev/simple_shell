@@ -12,6 +12,7 @@ int main(int argc, char **argv)
 	char *inputLine = NULL;
 	char **command = NULL;
 	int status = 0;
+	int idx = 0;
 	(void) argc;
 
 	while (1)
@@ -23,10 +24,11 @@ int main(int argc, char **argv)
 				write(STDOUT_FILENO, "\n", 1);
 			return (status);
 		}
+		idx++;
 		command = formatString(inputLine);
 		if (!command)
 			continue;
-		status = _execute(command, argv);
+		status = _execute(command, argv, idx);
 	}
 	return (0);
 }

@@ -1,44 +1,47 @@
 #include "shell.h"
+/**
+ * _path - handle PATH
+ *
+ * @command: command to check
+ *
+ * Return: path
+ */
 char *_path(char *command)
 {
-	char *path_env, *full_cmd, *dir;
+	char *pathEnv, *fullCmd, *pathDir;
 	int i;
 	struct stat st;
 
 	for (i = 0; command[i]; i++)
 	{
-		if (command[i] == "/")
+		if (command[i] == '/')
 		{
-			if (stat(command, $st) == 0)
-			{
+			if (stat(command, &st) == 0)
 				return (_strdup(command));
-			}
 			return (NULL);
 		}
 	}
-	path_env = _getenv("PATH");
-	if (!path_env)
-	{
+	pathEnv = _getenv("PATH");
+	if (!pathEnv)
 		return (NULL);
-	}
-	dir = strtok(path_env, ":");
-	while (dir)
+	pathDir = strtok(pathEnv, ":");
+	while (pathDir)
 	{
-		full_cmd = malloc(_strlen(dir) + _strlen(command) + 2);
-		if (full_cmd)
+		fullCmd = malloc(_strlen(pathDir) + _strlen(command) + 2);
+		if (fullCmd)
 		{
-			_strcpy(full_cmd, dir);
-			_strcat(full_cmd, "/");
-			_strcat(full_cmd, command);
-			if (stat(full_cmd, &st) == 0)
+			_strcpy(fullCmd, pathDir);
+			_strcat(fullCmd, "/");
+			_strcat(fullCmd, command);
+			if (stat(fullCmd, &st) == 0)
 			{
-				free(path_env);
-				return (full_cmd);
+				free(pathEnv);
+				return (fullCmd);
 			}
-			free(full_cmd), full_cmd = NULL;
-			dir = strtok(NULL, ":");
+			free(fullCmd), fullCmd = NULL;
+			pathDir = strtok(NULL, ":");
 		}
 	}
-	free(path_env);
+	free(pathEnv);
 	return (NULL);
 }

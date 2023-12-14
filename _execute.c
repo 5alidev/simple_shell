@@ -9,23 +9,23 @@
  */
 int _execute(char **command, char **argv, int idx)
 {
-	char *full_cmd;
+	char *fullCmd;
 	pid_t pid;
 	int status;
 
-	full_cmd = _path(command[0]);
-	if(!full_cmd)
+	fullCmd = _path(command[0]);
+	if (!fullCmd)
 	{
-		print_error(argv[0], command[0], idx);
+		printError(argv[0], command[0], idx);
 		free2Darray(command);
-		return(127);
+		return (127);
 	}
 	pid = fork();
 	if (pid == 0)
 	{
-		if (execve(full_cmd, command, environ) == -1)
+		if (execve(fullCmd, command, environ) == -1)
 		{
-			free(full_cmd), full_cmd = NULL;
+			free(fullCmd), fullCmd = NULL;
 			free2Darray(command);
 		}
 	}
@@ -33,7 +33,7 @@ int _execute(char **command, char **argv, int idx)
 	{
 		waitpid(pid, &status, 0);
 		free2Darray(command);
-		free(full_cmd), full_cmd = NULL;
+		free(fullCmd), fullCmd = NULL;
 	}
 	return (WEXITSTATUS(status));
 }
